@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "Books";
+}
+@{
+    var gridData = ViewBag.GridData;
+  
+
+}
+
+
+<div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="collapse navbar-collapse">
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+
+                </form>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBookModal">
+                <i class="bi bi-plus-lg me-1"></i>Add
+            </button>
+
+        </div>
+    </nav>
+
+    <table class="table">
+        <thead class="table-light">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Format</th>
+                <th scope="col">Availability</th>
+                <th scope="col">PublishedDate</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider" style="overflow-x:auto; overflow-y:auto;">
+            @for (int i = 0; i < @gridData.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" class="dropdown-item open-view-book-modal" data-id="@gridData[i].Id">View</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item open-edit-book-modal text-warning" data-id="@gridData[i].Id">Edit</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item open-delete-book-modal text-danger" data-id="@gridData[i].Id">Delete</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </td>
+                    <td>@gridData[i].Title</td>
+                    <td>@gridData[i].Author</td>
+                    <td>@gridData[i].ISBN</td>
+                    <td>@gridData[i].Genre</td>
+                    <td>@gridData[i].Format</td>
+                    <td>@gridData[i].Availability</td>
+                    <td>@gridData[i].PublishedDate</td>
+                    <td>@gridData[i].Description</td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="createBookModal" tabindex="-1" aria-labelledby="createBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @await Html.PartialAsync("_CreateModal", new Book());
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="viewBookModal" tabindex="-1" aria-labelledby="viewBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="viewBookModalContent">
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="editBookModalContent">
+          
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteBookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="deleteBookModalContent">
+           
+        </div>
+    </div>
+</div>
+
+
+    @section Scripts{
+    <script>
+        $(document).on('click', '.open-view-book-modal', function (e) {
+            e.preventDefault();
+            var bookId = $(this).data('id');
+
+            $.get('/Book/View', { id: bookId }, function (partialHtml) {
+                $('#viewBookModalContent').html(partialHtml);
+                $('#viewBookModal').modal('show');
+            });
+        });
+
+
+        $(document).on('click', '.open-edit-book-modal', function (e) {
+            e.preventDefault();
+            var bookId = $(this).data('id');
+
+            $.get('/Book/Edit', { id: bookId }, function (html) {
+                $('#editBookModalContent').html(html);
+                $('#editBookModal').modal('show');
+            });
+        });
+
+
+         $(document).on('click', '.open-delete-book-modal', function (e) {
+            e.preventDefault();
+            var bookId = $(this).data('id');
+
+            $.get('/Book/GetForDelete', { id: bookId }, function (html) {
+                $('#deleteBookModalContent').html(html);
+                $('#deleteBookModal').modal('show');
+            });
+        });
+
+       
+    </script>
+
+    }

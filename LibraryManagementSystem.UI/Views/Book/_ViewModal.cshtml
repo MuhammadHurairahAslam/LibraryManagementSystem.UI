@@ -1,0 +1,54 @@
+﻿@model Book
+
+
+<div class="modal-header">
+    <h5 class="modal-title">Book Details</h5>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+    <div class="modal-body">
+        <div class="mb-3" >
+            <label class="form-label">Title</label>
+            <input value="@Model?.Title" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input value="@Model?.Author" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input value="@Model?.ISBN" class="form-control" readonly />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Genre</label>
+            <select class="form-select" disabled>
+                <option>@Model?.Genre</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Format</label>
+            <select class="form-select" disabled>
+                <option>@Model?.Format</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Availability</label>
+            <select class="form-select" disabled>
+                <option>@Model?.Availability</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Published Date</label>
+            <input value="@Model?.PublishedDate.ToString("yyyy-MM-dd")" class="form-control" type="date" readonly />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" readonly>@Model?.Description</textarea>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+    </div>
+
+

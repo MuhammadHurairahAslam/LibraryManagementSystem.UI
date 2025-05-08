@@ -1,0 +1,48 @@
+﻿@model Book
+
+<form asp-action="SaveBook" method="post">
+    <div class="modal-header">
+        <h5 class="modal-title">Add Book</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label" ></label>
+            <input asp-for="Title" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Author" class="form-label"></label>
+            <input asp-for="Author" class="form-control" required/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ISBN" class="form-label"></label>
+            <input asp-for="ISBN" class="form-control" required/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Genre" class="form-label"></label>
+            <select asp-for="Genre" class="form-select" asp-items="Html.GetEnumSelectList<BookGenre>()" required></select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Format" class="form-label"></label>
+            <select asp-for="Format" class="form-select" asp-items="Html.GetEnumSelectList<BookFormat>()" required></select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Availability" class="form-label"></label>
+            <select asp-for="Availability" class="form-select" asp-items="Html.GetEnumSelectList<BookAvailability>()" required></select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PublishedDate" class="form-label"></label>
+            <input asp-for="PublishedDate" type="date" class="form-control" required/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>

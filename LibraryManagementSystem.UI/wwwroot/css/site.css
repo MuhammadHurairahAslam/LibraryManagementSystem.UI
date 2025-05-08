@@ -1,0 +1,76 @@
+html {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevent page scroll */
+    display: flex;
+    flex-direction: column;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 92px; /* height of navbar */
+    left: 0;
+    bottom: 0;
+    padding-top: 1rem;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    background-color: #343a40;
+}
+
+    .sidebar a {
+        color: #fff;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+        .sidebar a:hover {
+            background-color: #0000FF !important;
+        }
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 91px; /* space for navbar */
+    height: calc(100vh - 91px); /* full height minus navbar */
+    overflow-y: auto; /* Enable scrolling here */
+}
+
+footer {
+    margin-left: 250px;
+    padding: 15px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .sidebar {
+        left: -250px;
+    }
+
+        .sidebar.show {
+            left: 0;
+        }
+
+    .main-content {
+        margin-left: 0;
+        padding-top: 80px;
+    }
+
+    footer {
+        margin-left: 0;
+    }
+}

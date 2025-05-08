@@ -1,0 +1,66 @@
+﻿@model Book
+
+<form asp-action="Update" method="post">
+    <div class="modal-header">
+        <h5 class="modal-title">Edit Book</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <div class="modal-body">
+       
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Author"></label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ISBN"></label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Genre"></label>
+            <select asp-for="Genre" asp-items="Html.GetEnumSelectList<BookGenre>()" class="form-control"></select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Format"></label>
+            <select asp-for="Format" asp-items="Html.GetEnumSelectList<BookFormat>()" class="form-control"></select>
+            <span asp-validation-for="Format" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Availability"></label>
+            <select asp-for="Availability" asp-items="Html.GetEnumSelectList<BookAvailability>()" class="form-control"></select>
+            <span asp-validation-for="Availability" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PublishedDate"></label>
+            <input asp-for="PublishedDate" type="date" class="form-control" />
+            <span asp-validation-for="PublishedDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>

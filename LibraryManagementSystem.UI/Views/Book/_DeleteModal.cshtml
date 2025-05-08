@@ -1,0 +1,18 @@
+﻿@model Book
+
+<div class="modal-header bg-danger text-white">
+    <h5 class="modal-title">Confirm Delete</h5>
+    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+</div>
+
+<div class="modal-body">
+    Are you sure you want to delete the book: <strong>@Model.Title</strong>?
+</div>
+
+<div class="modal-footer">
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger">OK</button>
+    </form>
+</div>
